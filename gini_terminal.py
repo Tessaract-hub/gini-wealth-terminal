@@ -6,6 +6,50 @@ import pandas as pd
 from matplotlib.backends.backend_pdf import PdfPages
 
 st.set_page_config(page_title="GINI Wealth Terminal", layout="wide", page_icon="💎")
+st.markdown("""
+<style>
+    /* Whole app background */
+    .stApp {
+        background-color: #0A0A0A;
+        color: #00FFE0;
+    }
+
+    /* Titles and text */
+    h1, h2, h3, h4, h5, h6, p {
+        color: #D800FF !important;
+    }
+
+    /* Metrics boxes */
+    div[data-testid="stMetric"] {
+        background-color: #1a1a1a;
+        border: 2px solid #D800FF;
+        border-radius: 12px;
+        padding: 10px;
+        margin: 5px;
+        color: #00FFE0 !important;
+    }
+
+    /* Buttons */
+    button, .stButton>button {
+        background: linear-gradient(90deg, #D800FF, #00FFE0);
+        color: #0A0A0A;
+        border: none;
+        border-radius: 8px;
+    }
+
+    /* PDF button override */
+    div.stDownloadButton button {
+        background: linear-gradient(90deg, #FF00AA, #00FFE0);
+        color: #0A0A0A;
+    }
+
+    /* Sidebar */
+    section[data-testid="stSidebar"] {
+        background-color: #0A0A0A;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("💎 GINI Wealth Terminal")
 st.markdown("#### Compare multiple assets & download your cosmic report as PDF 🚀")
 
