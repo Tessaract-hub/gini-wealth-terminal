@@ -49,7 +49,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
 st.title("💎 GINI Wealth Terminal")
 st.markdown("#### Compare multiple assets & download your cosmic report as PDF 🚀")
 
