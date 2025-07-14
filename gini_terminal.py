@@ -70,3 +70,4 @@ if st.button("📄 Download PDF Report"):
 
     with open("GINI_Wealth_Report.pdf", "rb") as f:
         st.download_button("⬇️ Download GINI_Wealth_Report.pdf", f, "GINI_Wealth_Report.pdf")
+
