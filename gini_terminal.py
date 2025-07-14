@@ -24,7 +24,6 @@ def calculate_gini(x):
     return (n + 1 - 2 * np.sum(cumulative) / cumulative[-1]) / n
 
 tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip()]
-lorenz_data = {}
 gini_scores = {}
 
 fig, ax = plt.subplots(figsize=(10, 7))
@@ -46,8 +45,9 @@ for idx, ticker in enumerate(tickers):
 
     sorted_prices = np.sort(prices)
     cumulative_prices = np.cumsum(sorted_prices) / np.sum(sorted_prices)
-    lorenz_x = np.linspace(0, 1, len(cumulative_prices))
+    lorenz_x = np.insert(np.linspace(0, 1, len(cumulative_prices)), 0, 0)
     lorenz_y = np.insert(cumulative_prices, 0, 0)
+
     ax.plot(lorenz_x, lorenz_y, color=colors[idx % len(colors)], linewidth=2, label=f"{ticker}")
 
 ax.plot([0,1], [0,1], '--', color='gray')
@@ -57,17 +57,13 @@ st.pyplot(fig)
 # ================= PDF DOWNLOAD SECTION =================
 if st.button("📄 Download PDF Report"):
     with PdfPages("GINI_Wealth_Report.pdf") as pdf:
-        # Summary page
         fig_summary, ax_sum = plt.subplots(figsize=(8,4))
         ax_sum.axis('off')
         summary_text = "\n".join([f"{t}: GINI = {g:.3f}" for t, g in gini_scores.items()])
         ax_sum.text(0.1, 0.5, "GINI Wealth Terminal Report\n\n" + summary_text, fontsize=12, color="white")
         fig_summary.patch.set_facecolor('#0A0A0A')
         pdf.savefig(fig_summary, facecolor=fig_summary.get_facecolor())
-        
-        # Lorenz curve page
         pdf.savefig(fig)
 
     with open("GINI_Wealth_Report.pdf", "rb") as f:
         st.download_button("⬇️ Download GINI_Wealth_Report.pdf", f, "GINI_Wealth_Report.pdf")
-
